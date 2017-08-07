@@ -1,5 +1,5 @@
 <div class="container">
-	<form action="" method="POST" class="form-horizontal" role="form">
+	<form class="form-horizontal" ng-controller=InsertCardCtrl>
 		<div class="form-group">
 			<legend>Adicionar Cartão</legend>
 		</div>
@@ -7,7 +7,8 @@
 		<div class="form-group row">
 			<div class="col-md-2">
 				<label for="brand">Bandeira</label>
-				<select class="form-control" id="brand">
+				<select class="form-control" id="brand" ng-model="card.brand" required>
+				    <option value="" disabled selected>Bandeira</option>
 					<option value="visa">Visa</option>
 					<option value="mastercard">Mastercard</option>
 					<option value="other">Outro</option>
@@ -16,48 +17,41 @@
 
 			<div class="col-md-4">
 				<label for="cardnum">Numero do cartão</label>
-				<input type="text" id="cardnum" class="form-control">
+				<input type="text" id="cardnum" class="form-control" ng-model="card.number" ui-mask="9999 9999 9999 9999" placeholder="xxxx xxxx xxxx xxxx" ui-mask-placeholder="" ui-mask-placeholder-char="space" required>
 			</div>
 		
 			<div class="col-md-6">
 				<label for="name">Nome do titular</label>
-				<input type="text" id="name" class="form-control">
+				<input type="text" id="name" class="form-control" ng-model="card.name" placeholder="José L Campos" required>
 			</div>
 		</div>
 
 		<div class="form-group row">
 			<div class=col-md-2>
 				<label for="expdate">Mes de vencimento</label>
-				<select class="form-control" id="expdate">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
+				<select class="form-control" id="expdate" ng-model="card.exp_month" required>
+				    <option value="" disabled selected>Mês</option>
+					<option ng-repeat="mes in meses" value="{{mes}}">{{mes}}</option>
 				</select>
 			</div>
 
 			<div class="col-md-4">
 				<label for="expyear">Ano de Vencimento</label>
-				<input type="text" id="expyear" class="form-control">
+				<select class="form-control" id="expyear" ng-model="card.exp_year" required>
+				    <option value="" disabled selected>Ano</option>
+					<option ng-repeat="ano in anos" value="{{ano}}">{{ano}}</option>
+				</select>
 			</div>
 
 			<div class="col-md-6">
 				<label for="limit">Limite</label>
-				<input type="text" id="limit" class="form-control">
+				<input type="text" id="limit" class="form-control" ng-model="card.limit" ui-money-mask placeholder="R$ 1.000,00" required>
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-md-12">
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button class="btn btn-primary" ng-click="vm.enviaCartao(card)">Submit</button>
 			</div>
 		</div>
 	</form>

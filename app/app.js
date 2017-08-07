@@ -6,7 +6,9 @@ angular.module('myApp', [
     'myApp.view2',
     'myApp.cardsView',
     'myApp.insertCardView',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.utils.masks',
+    'ui.mask'
 ])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
