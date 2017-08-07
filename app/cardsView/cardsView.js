@@ -1,12 +1,11 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.cardsView', ['ngRoute'])
 
 
 
-    .controller('View1Ctrl', ["$http", "config", "$log", function ($http, config, $log) {
+    .controller('CardsViewCtrl', ["$http", "config", "$log", function ($http, config, $log) {
         var vm = this;
-        vm.dados = [];
 
         vm.sendGet = function () {
             $http({
@@ -39,5 +38,6 @@ angular.module('myApp.view1', ['ngRoute'])
             $log.info("Edit card " + id)
         }
 
+        vm.sendGet();
 
     }]);

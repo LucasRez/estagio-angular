@@ -1,0 +1,30 @@
+<div class="container">
+		<div class="col-md-6" ng-repeat="data in vm.data">
+
+			<div class="panel panel-default">
+				<div class="panel-body" >
+			
+						<div class="col-md-2">
+							<i ng-if="data.brand === 'mastercard'" class="fa fa-cc-mastercard fa-5x card" aria-hidden="true"></i>
+							<i ng-if="data.brand === 'visa'" class="fa fa-cc-visa fa-5x card" aria-hidden="true"></i>
+							<i ng-if="(data.brand !== 'visa') && (data.brand !== 'mastercard')" class="fa fa-credit-card fa-5x card" aria-hidden="true"></i>
+						</div>
+						<div class="col-md-10">
+							<ul>
+								<li>Nome: {{data.name}}</li>
+								<li>Numero: {{data.number}}</li>
+								<li>Data de Vencimento: {{data.exp_month}}/{{data.exp_year}}</li>
+								<li>Limite disponível: {{data.available_limit}}/{{data.limit}}</li>
+							</ul>
+						</div>
+
+				</div>
+
+				<div class="panel-footer">
+					<button class="btn btn-default" data="{{data.id}}" ng-click="vm.editCard(data.id)">Edit</button>
+					<button class="btn btn-default" data="{{data.id}}" ng-click="vm.deleteCard(data.id)">Delete</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
