@@ -4,8 +4,9 @@ angular.module('myApp.view1', ['ngRoute'])
 
 
 
-    .controller('View1Ctrl', ["$http", "config", function ($http, config) {
+    .controller('View1Ctrl', ["$http", "config", "$log", function ($http, config, $log) {
         var vm = this;
+        vm.dados = [];
 
         vm.sendGet = function () {
             $http({
@@ -17,11 +18,26 @@ angular.module('myApp.view1', ['ngRoute'])
                 url: config.URL + "cards",
             }).then(function (response) {
                 vm.data = response.data;
-                vm.dataView = JSON.stringify(vm.data, null, "\t");
+                var data = [];
+                for (var i = 0; i < vm.data.length; i++) {
+                    vm.data[i].limit = (vm.data[i].limit/100).toFixed(2).toString().replace(".",",");
+                    vm.data[i].available_limit = (vm.data[i].available_limit/100).toFixed(2).toString().replace(".",",");
+
+                }
+                
             }, function (response) {
                 vm.data = response.data || 'Request failed';
 
             });
         }
+
+        vm.deleteCard = function (id) {
+            $log.info("Delete card " + id);
+        }
+
+        vm.editCard = function (id) {
+            $log.info("Edit card " + id)
+        }
+
 
     }]);
