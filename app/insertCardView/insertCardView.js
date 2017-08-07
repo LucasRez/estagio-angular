@@ -4,7 +4,6 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 
 .controller('InsertCardCtrl', ["$http", "config", "$scope", "$log", function($http, config, $scope, $log) {
 	var vm = this;
-	$scope.valid = {};
 	$scope.anos = [];
 	$scope.meses = [];
 	$scope.card = {};
@@ -15,17 +14,44 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 			$scope.meses.push(i);
 		}
 
-		for (var i = 2017; i < 2067; i++) {
+		for (var i = 2017; i < 2061; i++) {
 			$scope.anos.push(i);
 		}
 	}
 
 	vm.inicializa();
+
+
 	vm.enviaCartao = function (card) {
 		angular.copy(card, $scope.newCard);
+
+		$scope.erros = [];
+		$scope.btnDisable = true;
+		if (!$scope.newCard.brand) {
+			$scope.erros.push({text:"Selecione a bandeira do cartão."});
+		}
+		if (!$scope.newCard.number || $scope.newCard.number.length !== 16) {
+			$scope.erros.push({text:"Insira um número de cartão de 16 dígitos."});
+		}
+		if (!$scope.newCard.name) {
+			$scope.erros.push({text:"Insira o nome do titular do cartão."});
+		}
+		if (!$scope.newCard.exp_month) {
+			$scope.erros.push({text:"Selecione o mês de vencimento do cartão."});
+		}
+		if (!$scope.newCard.exp_year) {
+			$scope.erros.push({text:"Selecione o ano de vencimento do cartão."});
+		}
+		if (!$scope.newCard.limit || $scope.newCard.limit < 0) {
+			$scope.erros.push({text:"Insira um limite maior que R$ 0,00 para o cartão."});
+		}
+
+		if ($scope.erros.length > 0) {
+			$scope.btnDisable = false;
+			return;
+		}
 		$scope.newCard.limit *= 100;
-		$log.info($scope.newCard);
-		$scope.valid.number = angular.isNumber($scope.card.number);
-		$log.info($scope.valid);
+		$scope.newCard.number = $scope.newCard.number.replace(/([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/, "$1 $2 $3 $4");
+		$log.info($scope.newCard)
 	}
 }]);

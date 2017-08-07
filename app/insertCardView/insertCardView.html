@@ -1,14 +1,21 @@
 <div class="container">
-	<form class="form-horizontal" ng-controller=InsertCardCtrl>
+	<form class="form-horizontal" ng-controller=InsertCardCtrl name="insert">
 		<div class="form-group">
 			<legend>Adicionar Cartão</legend>
 		</div>
 		
+		<div ng-repeat="erro in erros">
+			<div class="alert alert-danger alert-dismissable">
+				<a class="close" data-dismiss="alert" aria-label="close" ng-click="erros.splice($index,1)">&times;</a>
+				<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{erro.text}}</p>
+			</div>
+		</div>
+
 		<div class="form-group row">
 			<div class="col-md-2">
-				<label for="brand">Bandeira</label>
-				<select class="form-control" id="brand" ng-model="card.brand" required>
-				    <option value="" disabled selected>Bandeira</option>
+				<label class="control-label" for="brand" >Bandeira</label>
+				<select name="brand" class="form-control" id="brand" ng-model="card.brand">
+					<option value="" disabled selected>Bandeira</option>
 					<option value="visa">Visa</option>
 					<option value="mastercard">Mastercard</option>
 					<option value="other">Outro</option>
@@ -16,42 +23,42 @@
 			</div>
 
 			<div class="col-md-4">
-				<label for="cardnum">Numero do cartão</label>
-				<input type="text" id="cardnum" class="form-control" ng-model="card.number" ui-mask="9999 9999 9999 9999" placeholder="xxxx xxxx xxxx xxxx" ui-mask-placeholder="" ui-mask-placeholder-char="space" required>
+				<label class="control-label" for="cardnum">Numero do cartão</label>
+				<input name="number" type="text" id="cardnum" class="form-control" ng-model="card.number" ui-mask="9999 9999 9999 9999" placeholder="xxxx xxxx xxxx xxxx" ui-mask-placeholder="" ui-mask-placeholder-char="space" ui-options="{clearOnBlur: false}">
 			</div>
-		
+
 			<div class="col-md-6">
-				<label for="name">Nome do titular</label>
-				<input type="text" id="name" class="form-control" ng-model="card.name" placeholder="José L Campos" required>
+				<label class="control-label" for="name">Nome do titular</label>
+				<input name="name" type="text" id="name" class="form-control" ng-model="card.name" placeholder="José L Campos">
 			</div>
 		</div>
 
 		<div class="form-group row">
-			<div class=col-md-2>
-				<label for="expdate">Mes de vencimento</label>
-				<select class="form-control" id="expdate" ng-model="card.exp_month" required>
-				    <option value="" disabled selected>Mês</option>
+			<div class="col-md-2">
+				<label class="control-label" for="expdate">Mês de vencimento</label>
+				<select name="exp_month" class="form-control" id="expdate" ng-model="card.exp_month">
+					<option value="" disabled selected>Mês</option>
 					<option ng-repeat="mes in meses" value="{{mes}}">{{mes}}</option>
 				</select>
 			</div>
 
 			<div class="col-md-4">
-				<label for="expyear">Ano de Vencimento</label>
-				<select class="form-control" id="expyear" ng-model="card.exp_year" required>
-				    <option value="" disabled selected>Ano</option>
+				<label class="control-label" for="expyear">Ano de Vencimento</label>
+				<select name="exp_year" class="form-control" id="expyear" ng-model="card.exp_year">
+					<option value="" disabled selected>Ano</option>
 					<option ng-repeat="ano in anos" value="{{ano}}">{{ano}}</option>
 				</select>
 			</div>
 
 			<div class="col-md-6">
-				<label for="limit">Limite</label>
-				<input type="text" id="limit" class="form-control" ng-model="card.limit" ui-money-mask placeholder="R$ 1.000,00" required>
+				<label class="control-label" for="limit">Limite</label>
+				<input name="limit" type="text" id="limit" class="form-control" ng-model="card.limit" ui-money-mask placeholder="R$ 1.000,00">
 			</div>
 		</div>
 
 		<div class="form-group">
 			<div class="col-md-12">
-				<button class="btn btn-primary" ng-click="vm.enviaCartao(card)">Submit</button>
+				<button class="btn btn-primary" ng-click="vm.enviaCartao(card)" ng-disabled="btnDisable">Submit</button>
 			</div>
 		</div>
 	</form>
