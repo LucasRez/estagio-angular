@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'myApp.view2',
     'myApp.cardsView',
+    'myApp.insertCardView',
     'ui.bootstrap'
 ])
 
@@ -15,12 +16,17 @@ angular.module('myApp', [
             .when('/cards', {
                 templateUrl: 'cardsView/cardsView.html',
                 controller: 'CardsViewCtrl',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
             })
             .when('/view2', {
                 templateUrl: 'view2/view2.html',
                 controller: 'View2Ctrl',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+            })
+            .when('/addCard', {
+                templateUrl: 'insertCardView/insertCardView.html',
+                controller: 'InsertCardCtrl',
+                controllerAs: 'vm',
             });
 
 
