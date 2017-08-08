@@ -1,0 +1,71 @@
+<div class="container">
+	<h2>Pagamentos do cartao com final {{card.number.substr(data.number.length - 4)}} de {{card.name}}</h2>
+	<p>Limite disponível: R$ {{card.available_limit.toFixed(2).toString().replace('.',',')}}</p>
+	<hr>
+	<table class="table table-hover" ng-if="payments.length > 0">
+		<thead>
+			<tr>
+				<th class="col-xs-3">Valor</th>
+				<th class="col-xs-3">Data</th>
+				<th class="col-xs-3">Status</th>
+				<th class="col-xs-3">Ações</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="payment in payments">
+				<td class="col-xs-3">R$ {{payment.amount}}</td>
+				<td class="col-xs-3">{{payment.date}}</td>
+				<td class="col-xs-3">{{payment.status}}</td>
+				<td class="col-xs-3">
+					<button class="btn btn-success" title="Confirmar pagamento" ng-click="vm.setPaymentStatus('paid',payment)">
+						<i class="fa fa-check" aria-hidden="true"></i>
+					</button>
+					<button class="btn btn-danger" title="Falhar pagamento" ng-click="vm.setPaymentStatus('failed',payment)">
+						<i class="fa fa-times" aria-hidden="true"></i>
+					</button>
+					<button class="btn btn-info" title="Tornar pagamento pendente" ng-click="vm.setPaymentStatus('pending',payment)">
+						<i class="fa fa-clock-o" aria-hidden="true"></i>
+					</button>
+					<button class="btn btn-default" title="Excluir pagamento" ng-click="vm.deletePayment(payment.id)">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="jumbotron" ng-if="payments.length === 0">
+		<h2>Nao há pagamentos</h2>
+		<p>Utilize o botão abaixo para adicionar pagamentos</p>
+	</div>
+
+	<div ng-repeat="erro in erros" ng-if="formOpen">
+		<div class="alert alert-danger alert-dismissable">
+			<a class="close" data-dismiss="alert" aria-label="close" ng-click="erros.splice($index,1)">&times;</a>
+			<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{erro.text}}</p>
+		</div>
+	</div>
+
+	<form class="form-inline" ng-controller="PaymentsViewCtrl" ng-if="formOpen" name="addPayment">
+		
+		<div class="form-group">
+			<label class="control-label" for="valor">Valor: </label>
+			<input name="number" type="text" id="valor" class="form-control" ng-model="addPayment.amount" ui-money-mask placeholder="R$ 0,00">
+		</div>
+
+		<div class="form-group">
+			<div>
+				<button class="btn btn-primary" ng-click="vm.submitForm(addPayment.amount)" ng-disabled="btnDisable">Enviar</button>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div>
+				<button class="btn btn-danger" ng-click="vm.closeForm()" ng-disabled="btnDisable">Cancelar</button>
+			</div>
+		</div>
+	</form>
+
+	<button class="btn btn-success" ng-click="vm.openForm()" ng-if="!formOpen">Adicionar pagamento</button>
+</div>
