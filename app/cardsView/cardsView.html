@@ -7,14 +7,14 @@
 						<div class="col-md-4">
 							<i ng-if="data.brand === 'mastercard'" class="fa fa-cc-mastercard fa-5x card" aria-hidden="true"></i>
 							<i ng-if="data.brand === 'visa'" class="fa fa-cc-visa fa-5x card" aria-hidden="true"></i>
-							<i ng-if="(data.brand !== 'visa') && (data.brand !== 'mastercard')" class="fa fa-credit-card fa-5x card" aria-hidden="true"></i>
+							<i ng-if="(data.brand !== 'visa') && (data.brand !== 'mastercard')" class="fa fa-credit-card-alt fa-5x card" aria-hidden="true"></i>
 						</div>
 						<div class="col-md-8">
 							<ul class="list-group">
 								<li class="list-group-item">Nome: {{data.name}}</li>
-								<li class="list-group-item">Numero: **** **** **** {{data.number.substr(data.number.length - 4)}}</li>
-								<li class="list-group-item">Data de Vencimento: {{data.exp_month}}/{{data.exp_year}}</li>
-								<li class="list-group-item">Limite disponível: {{data.available_limit}}/{{data.limit}}</li>
+								<li class="list-group-item">Numero: {{data.number}}</li>
+								<li class="list-group-item">Data de Vencimento: {{data.exp_month}} / {{data.exp_year}}</li>
+								<li class="list-group-item">Limite disponível: R${{data.available_limit}} / R${{data.limit}}</li>
 							</ul>
 						</div>
 
@@ -23,6 +23,7 @@
 				<div class="panel-footer">
 					<button class="btn btn-default" data="{{data.id}}" ng-click="vm.editCard(data.id)">Edit</button>
 					<button class="btn btn-default" data="{{data.id}}" ng-click="vm.deleteCard(data.id)">Delete</button>
+					<button class="btn btn-default" data="{{data.id}}" ng-click="vm.viewPayments(data.id)">Payments</button>
 				</div>
 
 			</div>

@@ -2,7 +2,7 @@
 
 angular.module('myApp.insertCardView', ['ngRoute'])
 
-.controller('InsertCardCtrl', ["$http", "config", "$scope", "$log", function($http, config, $scope, $log) {
+.controller('InsertCardCtrl', ["$http", "config", "$scope", "$location", function($http, config, $scope, $location) {
 	var vm = this;
 	$scope.anos = [];
 	$scope.meses = [];
@@ -51,7 +51,22 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 			return;
 		}
 		$scope.newCard.limit *= 100;
-		$scope.newCard.number = $scope.newCard.number.replace(/([0-9]{4})([0-9]{4})([0-9]{4})([0-9]{4})/, "$1 $2 $3 $4");
-		$log.info($scope.newCard)
+
+		$http({
+			method: "POST",
+			url: config.URL + "cards",
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+			},
+			data: $scope.newCard
+
+		}).then(function (response) {
+			$scope.data = response.data;
+			$location.path('/cards')
+		}, function (response) {
+			$scope.data = response.data || $scope.erros.push({text:"Falha na conexão com o servidor"});
+			$scope.btnDisable = false;
+		});
 	}
 }]);
