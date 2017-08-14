@@ -8,6 +8,7 @@ angular.module('myApp', [
     'myApp.editCardView',
     'myApp.paymentsView',
     'myApp.cardServices',
+    'myApp.paymentServices',
     'ui.bootstrap',
     'ui.utils.masks',
     'ui.mask'
