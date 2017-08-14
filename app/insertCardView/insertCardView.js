@@ -2,7 +2,7 @@
 
 angular.module('myApp.insertCardView', ['ngRoute'])
 
-.controller('InsertCardCtrl', ["$http", "config", "$scope", "$location", function($http, config, $scope, $location) {
+.controller('InsertCardCtrl', ["config", "$scope", "$location", "CardServices", function(config, $scope, $location, CardServices) {
 	var vm = this;
 	$scope.anos = [];
 	$scope.meses = [];
@@ -52,16 +52,8 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 		}
 		$scope.newCard.limit *= 100;
 
-		$http({
-			method: "POST",
-			url: config.URL + "cards",
-			headers: {
-				'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.appKey
-			},
-			data: $scope.newCard
-
-		}).then(function (response) {
+		CardServices.insertCard($scope.newCard)
+		.then(function (response) {
 			$scope.data = response.data;
 			$location.path('/cards')
 		}, function (response) {

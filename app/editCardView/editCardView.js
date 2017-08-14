@@ -2,7 +2,7 @@
 
 angular.module('myApp.editCardView', ['ngRoute'])
 
-.controller('EditCardCtrl', ["$http", "config", "$scope", "$location", "$routeParams", function($http, config, $scope, $location, $routeParams) {
+.controller('EditCardCtrl', ["config", "$scope", "$location", "$routeParams", "CardServices", function(config, $scope, $location, $routeParams, CardServices) {
 	var vm = this;
 	$scope.anos = [];
 	$scope.meses = [];
@@ -18,15 +18,9 @@ angular.module('myApp.editCardView', ['ngRoute'])
 		}
 	}
 
-	vm.sendGet = function () {
-		$http({
-			method: "GET",
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': 'Bearer ' + localStorage.appKey				
-			},
-			url: config.URL + "cards/" + $routeParams.cardId,
-		}).then(function (response) {
+	vm.sendGet = function (cardId) {
+		CardServices.getCard(cardId)
+		.then(function (response) {
 			$scope.card = response.data;
 			$scope.card.limit /= 100;
 
@@ -37,11 +31,10 @@ angular.module('myApp.editCardView', ['ngRoute'])
 	}
 
 	vm.inicializa();
-	vm.sendGet();
+	vm.sendGet($routeParams.cardId);
 
 	vm.enviaCartao = function (card) {
 		angular.copy(card, $scope.newCard);
-
 		$scope.erros = [];
 		$scope.btnDisable = true;
 		if (!$scope.newCard.brand) {
@@ -69,16 +62,8 @@ angular.module('myApp.editCardView', ['ngRoute'])
 		}
 		$scope.newCard.limit *= 100;
 
-		$http({
-			method: "PATCH",
-			url: config.URL + "cards/" + $routeParams.cardId,
-			headers: {
-				'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.appKey
-			},
-			data: $scope.newCard
-
-		}).then(function (response) {
+		CardServices.editCard($scope.newCard)
+		.then(function (response) {
 			$scope.data = response.data;
 			$location.path('/cards')
 		}, function (response) {
