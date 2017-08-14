@@ -57,7 +57,7 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 			url: config.URL + "cards",
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
 			},
 			data: $scope.newCard
 

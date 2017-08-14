@@ -14,7 +14,7 @@ angular.module('myApp.paymentsView', ['ngRoute'])
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
             },
             url: config.URL + "cards/" + $routeParams.cardId,
         }).then(function (response) {
@@ -33,7 +33,7 @@ angular.module('myApp.paymentsView', ['ngRoute'])
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
             },
             url: config.URL + "cards/" + $routeParams.cardId + "/payments",
         }).then(function (response) {
@@ -79,7 +79,7 @@ angular.module('myApp.paymentsView', ['ngRoute'])
             url: config.URL + "payments",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
             },
             data: $scope.newPayment
 
@@ -104,7 +104,7 @@ angular.module('myApp.paymentsView', ['ngRoute'])
             url: config.URL + "payments/" + $scope.payment.id,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
             },
             data: $scope.payment
 
@@ -123,7 +123,7 @@ angular.module('myApp.paymentsView', ['ngRoute'])
             url: config.URL + "payments/" + $scope.deleteId,
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
             },
 
         }).then(function (response) {

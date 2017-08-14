@@ -23,7 +23,7 @@ angular.module('myApp.editCardView', ['ngRoute'])
 			method: "GET",
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+				'Authorization': 'Bearer ' + localStorage.appKey				
 			},
 			url: config.URL + "cards/" + $routeParams.cardId,
 		}).then(function (response) {
@@ -74,7 +74,7 @@ angular.module('myApp.editCardView', ['ngRoute'])
 			url: config.URL + "cards/" + $routeParams.cardId,
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
 			},
 			data: $scope.newCard
 

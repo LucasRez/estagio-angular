@@ -15,6 +15,8 @@ angular.module('myApp', [
 .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
+    localStorage.appKey = "5c07773bfa62c3cc744bffbbcd72f2fd"
+
     $routeProvider
     .when('/cards', {
         templateUrl: 'cardsView/cardsView.html',

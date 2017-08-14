@@ -12,7 +12,7 @@ angular.module('myApp.cardsView', ['ngRoute'])
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                'Authorization': 'Bearer ' + localStorage.appKey
             },
             url: config.URL + "cards",
         }).then(function (response) {
@@ -35,7 +35,7 @@ angular.module('myApp.cardsView', ['ngRoute'])
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer 5c07773bfa62c3cc744bffbbcd72f2fd'
+                    'Authorization': 'Bearer ' + localStorage.appKey
                 },
                 url: config.URL + "cards/" + id,
             }).then(function (response) {
