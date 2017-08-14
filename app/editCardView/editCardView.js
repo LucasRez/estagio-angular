@@ -7,7 +7,8 @@ angular.module('myApp.editCardView', ['ngRoute'])
 	$scope.anos = [];
 	$scope.meses = [];
 	$scope.newCard = {};
-
+	$scope.erros = [];
+	
 	vm.inicializa = function () {
 		for (var i = 1; i < 13; i++) {
 			$scope.meses.push(i);
@@ -71,4 +72,15 @@ angular.module('myApp.editCardView', ['ngRoute'])
 			$scope.btnDisable = false;
 		});
 	}
-}]);
+}])
+
+
+.directive('zaguShowErrors', function() {
+    return {
+		scope: {
+			errors: '='
+		},
+        templateUrl: 'errors/errors.html',
+    };
+
+});

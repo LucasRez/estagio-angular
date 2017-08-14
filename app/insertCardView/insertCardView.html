@@ -1,15 +1,10 @@
 <div class="container">
-	<form class="form-horizontal" ng-controller=InsertCardCtrl name="insert">
+	<form class="form-horizontal" name="insert">
 		<div class="form-group">
 			<legend>Adicionar Cartão</legend>
 		</div>
 		
-		<div ng-repeat="erro in erros">
-			<div class="alert alert-danger alert-dismissable">
-				<a class="close" data-dismiss="alert" aria-label="close" ng-click="erros.splice($index,1)">&times;</a>
-				<p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{erro.text}}</p>
-			</div>
-		</div>
+		<zagu-show-errors errors="erros"></zagu-show-errors>		
 
 		<div class="form-group row">
 			<div class="col-md-2">

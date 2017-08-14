@@ -1,0 +1,6 @@
+        <div ng-repeat="error in errors">
+            <div class="alert alert-danger alert-dismissable">
+                <a class="close" data-dismiss="alert" aria-label="close" ng-click="errors.splice($index,1)">&times;</a>
+                <p><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{error.text}}</p>
+            </div>
+        </div>

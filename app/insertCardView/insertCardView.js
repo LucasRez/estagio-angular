@@ -8,6 +8,7 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 	$scope.meses = [];
 	$scope.card = {};
 	$scope.newCard = {};
+	$scope.erros = [];
 
 	vm.inicializa = function () {
 		for (var i = 1; i < 13; i++) {
@@ -61,4 +62,4 @@ angular.module('myApp.insertCardView', ['ngRoute'])
 			$scope.btnDisable = false;
 		});
 	}
-}]);
+}])
